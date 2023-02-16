@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
-import {Table} from 'antd';
+import {Modal, Table} from 'antd';
 import {validator} from "./data/validator";
 import {reportConfig} from "./data/report-config";
 import {data} from "./data/data";
+import styles from './Report.module.css';
 
 export const Report = () => {
-
-    const[tableData, setTableData] = useState(validator(reportConfig, data))
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [activeRecord, setActiveRecord] = useState(null);
+    const [tableData, setTableData] = useState(validator(reportConfig, data))
 
     console.log(tableData)
 
@@ -17,9 +19,13 @@ export const Report = () => {
         columns.push({
             title: item,
             dataIndex: item,
-            key: index,
+            key: item,
         })
     })
+
+    const closeModal = () => {
+        setIsModalVisible(false);
+    };
 
     return (
         <div style={{
@@ -30,7 +36,32 @@ export const Report = () => {
             <Table
                 dataSource={dataSource}
                 columns={columns}
-                pagination={{ defaultPageSize: 10, showSizeChanger: true}}
+                pagination={{defaultPageSize: 10, showSizeChanger: true}}
+                onRow={(record, rowIndex) => {
+                    return {
+                        onDoubleClick: () => {
+                            setActiveRecord(record);
+                            setIsModalVisible(true);
+                        },
+                    };
+                }}
             />
+            <Modal
+                title="Current Row Info"
+                open={isModalVisible}
+                onCancel={closeModal}
+                footer={null}
+            >
+                {
+                    (activeRecord) ?
+                    Object.keys(activeRecord).map((item, index) => {
+                        return <div className={styles.mrow} key={index}>
+                            <p>{item}</p>
+                            <p>{activeRecord[item]}</p>
+                        </div>
+                    }) : null
+                }
+
+            </Modal>
         </div>)
 }
