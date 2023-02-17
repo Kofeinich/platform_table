@@ -85,6 +85,92 @@ export const data = {
             "dataType": "Type 11",
             "format": "Format 11",
             "alignment": "A 11"
+        },
+
+        {
+            "dataField": "Field 12",
+            "caption": "Cap 12",
+            "dataType": "Type 12",
+            "format": "Format 12",
+            "alignment": "A 12"
+        },
+        {
+            "dataField": "Field 13",
+            "caption": "Cap 13",
+            "dataType": "Type 13",
+            "format": "Format 13",
+            "alignment": "A 13"
+        },
+        {
+            "dataField": "Field 14",
+            "caption": "Cap 14",
+            "dataType": "Type 14",
+            "format": "Format 14",
+            "alignment": "A 14"
+        },
+        {
+            "dataField": "Field 15",
+            "caption": "Cap 15",
+            "dataType": "Type 15",
+            "format": "Format 15",
+            "alignment": "A 15"
+        },
+        {
+            "dataField": "Field 16",
+            "caption": "Cap 16",
+            "dataType": "Type 16",
+            "format": "Format 16",
+            "alignment": "A 16"
+        },
+        {
+            "dataField": "Field 17",
+            "caption": "Cap 17",
+            "dataType": "Type 17",
+            "format": "Format 17",
+            "alignment": "A 17"
+        },
+
+        {
+            "dataField": "Field 18",
+            "caption": "Cap 18",
+            "dataType": "Type 18",
+            "format": "Format 18",
+            "alignment": "A 18"
+        },
+        {
+            "dataField": "Field 19",
+            "caption": "Cap 19",
+            "dataType": "Type 19",
+            "format": "Format 19",
+            "alignment": "A 19"
+        },
+        {
+            "dataField": "Field 20",
+            "caption": "Cap 20",
+            "dataType": "Type 20",
+            "format": "Format 20",
+            "alignment": "A 20"
+        },
+        {
+            "dataField": "Field 21",
+            "caption": "Cap 21",
+            "dataType": "Type 21",
+            "format": "Format 21",
+            "alignment": "A 21"
+        },
+        {
+            "dataField": "Field 22",
+            "caption": "Cap 22",
+            "dataType": "Type 22",
+            "format": "Format 22",
+            "alignment": "A 22"
+        },
+        {
+            "dataField": "Field 23",
+            "caption": "Cap 23",
+            "dataType": "Type 23",
+            "format": "Format 23",
+            "alignment": "A 23"
         }
     ]
 }
