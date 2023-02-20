@@ -17,13 +17,14 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
     const columnConfig= useSelector((state) => state.table.columns);
     const dispatchData= useDispatch()
     try {
-        dispatchData(loadData(validator(reportConfigJSON, reportData)))
+        console.log(dispatchData(loadData(validator(reportConfigJSON, reportData))))
     } catch (err) {
         console.error(err)
     }
 
     const rowConfig = useSelector((state) => state.table.data?.columns)
     const additionalData = useSelector((state) => ({name: state.table.data?.name, code: state.table.data?.code}))
+
 
 
     const closeModal = () => {
@@ -41,7 +42,7 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
             </header>
             <Table
                 dataSource={rowConfig}
-                columns={columnConfig}
+                columns={columnConfig.filter((value) => value.visible)}
                 pagination={{defaultPageSize: 10, showSizeChanger: true}}
                 onRow={(record) => {
                     return {

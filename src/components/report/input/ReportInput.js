@@ -14,10 +14,6 @@ export const ReportInput = ({initialValue}) => {
     })
 
     const firstUpdate = useRef(true);
-    const dis = () => {
-        dispatchColumnValue(changeColumnsData({inputValue}))
-        dispatchRowValue(changeRowData({inputValue}))
-    }
     const handleInput = (e) => {
         // if (firstUpdate.current) {
         //     firstUpdate.current = false;
@@ -30,19 +26,20 @@ export const ReportInput = ({initialValue}) => {
             oldValue: prevState.newValue,
             newValue: e.target.value
         }))
+        dispatchColumnValue(changeColumnsData({inputValue}))
+        dispatchRowValue(changeRowData({inputValue}))
     }
 
-    useEffect(() => {
-        dis()
-    }, [inputValue])
+    // useEffect(() => {
+    //     dispatchColumnValue(changeColumnsData({inputValue}))
+    //     dispatchRowValue(changeRowData({inputValue}))
+    // }, [inputValue])
 
     return <input
         className={styles.input}
         onChange={(event) => {
             handleInput(event)
-            dis()
         }}
-
         placeholder={initialValue}
         value={inputValue.newValue}
     />
