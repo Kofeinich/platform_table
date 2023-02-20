@@ -8,18 +8,25 @@ export const ReportInput = ({initialValue}) => {
     const dispatchColumnValue = useDispatch()
     const dispatchRowValue = useDispatch()
 
+
     const [inputValue, setInputValue] = useState({
         oldValue: initialValue,
         newValue: initialValue,
     })
 
+    const firstUpdate = useRef(true);
     const handleInput = (e) => {
         setInputValue((prevState) => ({
             oldValue: prevState.newValue,
             newValue: e.target.value
         }))
-        dispatchColumnValue(changeColumnsData({inputValue}))
-        dispatchRowValue(changeRowData({inputValue}))
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+        } else {
+            console.log(inputValue)
+            dispatchColumnValue(changeColumnsData({inputValue}))
+            dispatchRowValue(changeRowData({inputValue}))
+        }
     }
 
 
@@ -28,6 +35,7 @@ export const ReportInput = ({initialValue}) => {
         onChange={(event) => {
             handleInput(event)
         }}
+
         placeholder={initialValue}
         value={inputValue.newValue}
     />

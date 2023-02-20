@@ -31,11 +31,11 @@ const tableSlice = createSlice({
             })
         },
         changeRowData(state, action) {
-            state.data.columns?.forEach((item) => {
 
-                console.log(state.data.columns.item.key)
-                if (action.payload.inputValue.oldValue in item) {
-                    item[action.payload.inputValue.newValue] = item.key
+            state.data.columns?.forEach((item) => {
+                if (typeof item[action.payload.inputValue.oldValue]  !== "undefined") {
+                    console.log(action.payload.inputValue)
+                    item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
                     delete item[action.payload.inputValue.oldValue]
                 } else {
                     console.log('Bad')
@@ -44,8 +44,8 @@ const tableSlice = createSlice({
         },
         changeColumnsData(state, action) {
             state.columns?.forEach((item) => {
-                if (action.payload.inputValue.oldValue in item) {
-                    item[action.payload.inputValue.newValue] = item.key
+                if (typeof item[action.payload.inputValue.oldValue]  !== "undefined") {
+                    item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
                     delete item[action.payload.inputValue.oldValue]
                 } else {
                     console.log('Bad')
