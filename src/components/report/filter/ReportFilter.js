@@ -1,33 +1,34 @@
 import {Checkbox, Dropdown, Menu} from "antd";
 import styles from "./ReportFilter.module.css";
-import React, {useEffect, useState} from "react";
+import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {changeVisibility} from "../../../store/slices/tableSlice";
 
 
-export const ReportFilter = ({columns}) => {
-    let status = new Map(columns?.map((item) => [item.key, true]))
-    console.log(status)
-    const [selectedKeys, setSelectedKeys] = useState({status})
+export const ReportFilter = () => {
 
+    const columns= useSelector((state) => state.table.columns);
 
+    const dispatchStatus = useDispatch()
 
     const filterMenu = (
         <Menu>
-            {/*{*/}
-            {/*    columns.map((item, index) => {*/}
-            {/*        return <Menu.Item key={index}>*/}
-            {/*            <div className={styles.item}>*/}
-            {/*                <Checkbox*/}
-            {/*                    onChange={(ch) => {*/}
+            {
+                columns.map((item, index) => {
+                    return <Menu.Item key={index}>
+                        <div className={styles.item}>
+                            <Checkbox
+                                onChange={(ch) => {
+                                    dispatchStatus(changeVisibility({key: item.key, visible: ch.target.checked}))
+                                }}
 
-            {/*                    }}*/}
-
-            {/*                    defaultChecked={true}*/}
-            {/*                />*/}
-            {/*                {item.key}*/}
-            {/*            </div>*/}
-            {/*        </Menu.Item>*/}
-            {/*    })*/}
-            {/*}*/}
+                                defaultChecked={true}
+                            />
+                            {item.key}
+                        </div>
+                    </Menu.Item>
+                })
+            }
         </Menu>
     );
 

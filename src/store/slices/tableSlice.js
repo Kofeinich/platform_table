@@ -14,24 +14,44 @@ const tableSlice = createSlice({
                 key: item,
                 visible: true,
             }
-        }),
-        data: {
-
-        }
+        }).filter((value) => value.visible),
+        data: {}
     },
     reducers: {
         loadData(state, action) {
             state.data = action.payload
         },
-        // changeVisibility(state, action){
-        //     state[action.payload.blockId].enabled = action.payload.nowEnabled
-        // },
-        // changeRowData(state, action){
-        //     state[action.payload.blockId].fields[action.payload.fieldId].fieldReadonly = action.payload.readonly
-        // },
-        // changeColumnsData(state, action){
-        //     state[action.payload.blockId].fields[action.payload.fieldId].fieldReadonly = action.payload.readonly
-        // }
+        changeVisibility(state, action) {
+            state.columns?.forEach((item) => {
+                if (action.payload.key === item.key) {
+                    item.visible = action.payload.visible
+                } else {
+                    console.log('Bad')
+                }
+            })
+        },
+        changeRowData(state, action) {
+            state.data.columns?.forEach((item) => {
+
+                console.log(state.data.columns.item.key)
+                if (action.payload.inputValue.oldValue in item) {
+                    item[action.payload.inputValue.newValue] = item.key
+                    delete item[action.payload.inputValue.oldValue]
+                } else {
+                    console.log('Bad')
+                }
+            })
+        },
+        changeColumnsData(state, action) {
+            state.columns?.forEach((item) => {
+                if (action.payload.inputValue.oldValue in item) {
+                    item[action.payload.inputValue.newValue] = item.key
+                    delete item[action.payload.inputValue.oldValue]
+                } else {
+                    console.log('Bad')
+                }
+            })
+        },
     }
 })
 
