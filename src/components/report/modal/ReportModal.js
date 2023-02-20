@@ -19,6 +19,5 @@ export const ReportModal = ({activeRecord, onOpen, onClose}) => {
                     </div>
                 }) : null
         }
-
     </Modal>
 }

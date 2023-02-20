@@ -4,28 +4,30 @@ import React, {useEffect, useState} from "react";
 
 
 export const ReportFilter = ({columns}) => {
-    let status = columns?.map((item) => ({[item.key]: true}))
+    let status = new Map(columns?.map((item) => [item.key, true]))
+    console.log(status)
     const [selectedKeys, setSelectedKeys] = useState({status})
 
 
 
     const filterMenu = (
         <Menu>
-            {
-                columns.map((item, index) => {
-                    return <Menu.Item key={index}>
-                        <div className={styles.item}>
-                            <Checkbox
-                                onChange={(ch) => {
-                                    console.log([...selectedKeys.status])
-                                }}
-                                defaultChecked={true}
-                            />
-                            {item.key}
-                        </div>
-                    </Menu.Item>
-                })
-            }
+            {/*{*/}
+            {/*    columns.map((item, index) => {*/}
+            {/*        return <Menu.Item key={index}>*/}
+            {/*            <div className={styles.item}>*/}
+            {/*                <Checkbox*/}
+            {/*                    onChange={(ch) => {*/}
+
+            {/*                    }}*/}
+
+            {/*                    defaultChecked={true}*/}
+            {/*                />*/}
+            {/*                {item.key}*/}
+            {/*            </div>*/}
+            {/*        </Menu.Item>*/}
+            {/*    })*/}
+            {/*}*/}
         </Menu>
     );
 
