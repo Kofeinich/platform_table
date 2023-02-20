@@ -9,6 +9,6 @@ export const validator = (reportSchema, reportData) => {
         return reportData;
     } else {
         console.error("Validate error")
-        return null
+        return []
     }
 };

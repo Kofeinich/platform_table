@@ -6,6 +6,8 @@ import {data} from "./data/data";
 import styles from './Report.module.css';
 
 export const Report = () => {
+    const [columnsData, setColumnsData] = useState(reportConfig)
+    // const [dataSource, setDataSource] = useState(validator(columnsData, data)
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [activeRecord, setActiveRecord] = useState(null);
 
@@ -54,7 +56,7 @@ export const Report = () => {
             <h5>{tableData.code}</h5>
             <Table
                 dataSource={dataSource}
-                columns={columns}
+                columns={columnsData}
                 pagination={{defaultPageSize: 10, showSizeChanger: true}}
                 onRow={(record) => {
                     return {

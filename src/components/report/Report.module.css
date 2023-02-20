@@ -1,11 +1,9 @@
-.mrow {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 20px;
-}
-
 .table {
     display: block;
-    width: 800px;
-    padding: 30px;
+}
+
+.column {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
 }
