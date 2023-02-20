@@ -19,37 +19,49 @@ const tableSlice = createSlice({
     },
     reducers: {
         loadData(state, action) {
-            state.data = action.payload
+            return Object.assign({}, state, {
+                data:  action.payload
+            })
         },
         changeVisibility(state, action) {
-            state.columns?.forEach((item) => {
-                if (action.payload.key === item.key) {
-                    item.visible = action.payload.visible
-                } else {
-                    console.log('Bad')
-                }
+            return Object.assign({}, state, {
+                columns: state.columns?.forEach((item) => {
+                    if (action.payload.key === item.key) {
+                        item.visible = action.payload.visible
+                    } else {
+                        console.log('Bad')
+                    }
+                    return item
+                })
             })
         },
         changeRowData(state, action) {
-
-            state.data.columns?.forEach((item) => {
-                if (typeof item[action.payload.inputValue.oldValue]  !== "undefined") {
-                    console.log(action.payload.inputValue)
-                    item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
-                    delete item[action.payload.inputValue.oldValue]
-                } else {
-                    console.log('Bad')
-                }
+            return Object.assign({}, state, {
+                data: Object.assign({}, state.data, {
+                    columns: state.data.columns?.map((item) => {
+                        if (typeof item[action.payload.inputValue.oldValue] !== "undefined") {
+                            console.log(action.payload.inputValue)
+                            item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
+                            delete item[action.payload.inputValue.oldValue]
+                        } else {
+                            console.log('Bad')
+                        }
+                        return item
+                    })
+                })
             })
         },
         changeColumnsData(state, action) {
-            state.columns?.forEach((item) => {
-                if (typeof item[action.payload.inputValue.oldValue]  !== "undefined") {
-                    item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
-                    delete item[action.payload.inputValue.oldValue]
-                } else {
-                    console.log('Bad')
-                }
+            return Object.assign({}, state, {
+                columns: state.columns?.map((item) => {
+                    if (typeof item[action.payload.inputValue.oldValue] !== "undefined") {
+                        item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
+                        delete item[action.payload.inputValue.oldValue]
+                    } else {
+                        console.log('Bad')
+                    }
+                    return item
+                })
             })
         },
     }
