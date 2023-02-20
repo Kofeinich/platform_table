@@ -1,18 +1,19 @@
 import {useEffect, useRef, useState} from "react";
 import styles from "./ReportInput.module.css";
 
-export const ReportInput = ({initialValue, changeData}) => {
+export const ReportInput = ({initialValue, changeDataSource}) => {
     const [inputValue, setInputValue] = useState({
         oldValue: initialValue,
         newValue: initialValue,
     })
 
-    const callbacksList = useRef([changeData]);
+
+    const callbacksList = useRef([changeDataSource]);
     const handleInput = (e) => {
-        setInputValue({
-            oldValue: inputValue.newValue,
-            newValue: e.currentTarget.value,
-        })
+        setInputValue((prevState) => ({
+            oldValue: prevState.newValue,
+            newValue: e.target.value
+        }))
     }
 
     useEffect(() => {
@@ -20,11 +21,9 @@ export const ReportInput = ({initialValue, changeData}) => {
     }, [inputValue])
 
 
-
-
     return <input
         className={styles.input}
-        onInput={(event) => {
+        onChange={(event) => {
             handleInput(event)
         }}
         placeholder={initialValue}

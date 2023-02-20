@@ -7,3 +7,14 @@
     justify-content: space-between;
     padding: 5px 10px;
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+}
