@@ -33,7 +33,6 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
         setIsModalVisible(false)
     }
 
-    console.log(sortedColumnConfig)
 
     return (
         <section className={styles.table}>

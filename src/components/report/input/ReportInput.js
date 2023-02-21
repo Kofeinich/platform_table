@@ -1,11 +1,14 @@
-import {useLayoutEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import styles from "./ReportInput.module.css";
 import {useDispatch} from "react-redux";
 import {changeColumnsData, changeRowData} from "../../../store/slices/tableSlice";
+import {logDOM} from "@testing-library/react";
 
 export const ReportInput = ({initialValue}) => {
     const dispatchColumnValue = useDispatch()
     const dispatchRowValue = useDispatch()
+
+    const [canUpdate, setCanUpdate] =  useState(false)
 
 
     const [inputValue, setInputValue] = useState({
@@ -13,30 +16,29 @@ export const ReportInput = ({initialValue}) => {
         newValue: initialValue,
     })
 
-    const cancelUpdate = useRef(false);
-    const handleInput = (e) => {
-        setInputValue((prevState) => ({
-            oldValue: prevState.newValue,
-            newValue: e.target.value
-        }))
-    }
-
-    const d = () => {
-        dispatchColumnValue(changeColumnsData({inputValue}))
-        dispatchRowValue(changeRowData({inputValue}))
+    const submitChanges = () => {
+        if (canUpdate) {
+            dispatchColumnValue(changeColumnsData({inputValue}))
+            dispatchRowValue(changeRowData({inputValue}))
+            setCanUpdate(false)
+        }
+        console.log(inputValue)
     }
 
 
     return <input
         className={styles.input}
         onChange={(event) => {
-            handleInput(event)
-            d()
+            setInputValue((prevState) => ({
+                oldValue: inputValue.newValue,
+                newValue: event.target.value
+            }))
         }}
-        // onBlur={() => {
-        //     cancelUpdate.current = true
-        //     d()
-        // }}
+        onFocus={() => {setCanUpdate(false)}}
+        onBlur={(event) => {
+            setCanUpdate(true)
+            submitChanges()
+        }}
 
         placeholder={initialValue}
         value={inputValue.newValue}
