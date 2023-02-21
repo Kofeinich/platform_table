@@ -26,54 +26,50 @@ const tableSlice = createSlice({
         changeVisibility(state, action) {
             return Object.assign({}, state, {
                 columns: Object.keys(() => {
-                    let items ={}
-                    state.columns.forEach((item) => {
-                        if (action.payload.key === item.key) {
-                            item.visible = action.payload.visible
-                        } else {
-                            console.log('Bad')
-                        }
-                        items = {...items, item}
-                    })
-                    return items
+                    return new Map(state.columns.forEach((item) => {
+                            if (action.payload.key === item.key) {
+                                item.visible = action.payload.visible
+                            } else {
+                                console.log('Bad')
+                            }
+
+                        })
+                    )
                 })
             })
         },
         changeRowData(state, action) {
-            return Object.assign({}, state, {
-                data: Object.assign({}, state.data, {
-                    columns: Object.keys(() => {
-                        let items ={}
-                        state.data.columns.forEach((item) => {
-                            if (typeof item[action.payload.inputValue.oldValue] !== "undefined") {
-                                item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
-                                delete item[action.payload.inputValue.oldValue]
-                            } else {
-                                console.log('Bad')
-                            }
-                            items = {...items, item}
-                        })
-                        return items
-                    })
-                })
-            })
+            // return Object.assign({}, state, {
+            //     data: Object.assign({}, state.data, {
+            //         columns: Object.keys(() => {
+            //             return new Map(state.data.columns.forEach((item) => {
+            //                     if (typeof item[action.payload.inputValue.oldValue] !== "undefined") {
+            //                         item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
+            //                         delete item[action.payload.inputValue.oldValue]
+            //                     } else {
+            //                         console.log('Bad')
+            //                     }
+            //
+            //                 })
+            //             )
+            //         })
+            //     })
+            // })
         },
         changeColumnsData(state, action) {
-            return Object.assign({}, state, {
-                columns: Object.keys(() => {
-                    let items ={}
-                    state.columns.forEach((item) => {
-                        if (typeof item[action.payload.inputValue.oldValue] !== "undefined") {
-                            item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
-                            delete item[action.payload.inputValue.oldValue]
-                        } else {
-                            console.log('Bad')
-                        }
-                        items = {...items, item}
-                    })
-                    return items
-                })
-            })
+            // return Object.assign({}, state, {
+            //     columns: Object.keys(() => {
+            //         return new Map(state.columns.map((item) => {
+            //                 if (typeof item[action.payload.inputValue.oldValue] !== "undefined") {
+            //                     item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
+            //                     delete item[action.payload.inputValue.oldValue]
+            //                 } else {
+            //                     console.log('Bad')
+            //                 }
+            //             })
+            //         )
+            //     })
+            // })
         },
     }
 })

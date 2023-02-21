@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {validator} from "./data/validator";
 import styles from "./Report.module.css";
 import {Table} from "antd";
@@ -16,11 +16,13 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
     const [activeRecord, setActiveRecord] = useState(null);
     const columnConfig= useSelector((state) => state.table.columns);
     const dispatchData= useDispatch()
-    try {
-        console.log(dispatchData(loadData(validator(reportConfigJSON, reportData))))
-    } catch (err) {
-        console.error(err)
-    }
+    useEffect(() => {
+        try {
+            console.log(dispatchData(loadData(validator(reportConfigJSON, reportData))))
+        } catch (err) {
+            console.error(err)
+        }
+    }, [])
 
     const rowConfig = useSelector((state) => state.table.data?.columns)
     const additionalData = useSelector((state) => ({name: state.table.data?.name, code: state.table.data?.code}))
