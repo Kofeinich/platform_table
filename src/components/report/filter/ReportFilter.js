@@ -22,7 +22,7 @@ export const ReportFilter = () => {
                                     dispatchStatus(changeVisibility({key: item.key, visible: ch.target.checked}))
                                 }}
 
-                                defaultChecked={item.visible}
+                                defaultChecked={true}
                             />
                             {item.key}
                         </div>

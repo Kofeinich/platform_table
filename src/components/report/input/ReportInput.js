@@ -33,12 +33,14 @@ export const ReportInput = ({initialValue}) => {
     return <input
         className={styles.input}
         onChange={(event) => {
-            handleInput(event)
-        }}
-        onBlur={() => {
             cancelUpdate.current = true
+            handleInput(event)
             d()
         }}
+        // onBlur={() => {
+        //     cancelUpdate.current = true
+        //     d()
+        // }}
 
         placeholder={initialValue}
         value={inputValue.newValue}

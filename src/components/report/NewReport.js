@@ -15,7 +15,10 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [activeRecord, setActiveRecord] = useState(null);
     const columnConfig= useSelector((state) => state.table.columns);
+// .filter(item => item.visible === true )
+    const sortedColumnConfig = columnConfig
     const dispatchData= useDispatch()
+
     useEffect(() => {
         try {
             console.log(dispatchData(loadData(validator(reportConfigJSON, reportData))))
@@ -24,10 +27,10 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
         }
     }, [])
 
-    const rowConfig = useSelector((state) => state.table.data?.columns)
-    const additionalData = useSelector((state) => ({name: state.table.data?.name, code: state.table.data?.code}))
+    const rowConfig = useSelector((state) => state.table.data.columns)
+    const additionalData = useSelector((state) => ({name: state.table.data.name, code: state.table.data.code}))
 
-
+    console.log(rowConfig)
 
     const closeModal = () => {
         setIsModalVisible(false)
@@ -44,7 +47,7 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
             </header>
             <Table
                 dataSource={rowConfig}
-                columns={columnConfig.filter((value) => value.visible)}
+                columns={sortedColumnConfig}
                 pagination={{defaultPageSize: 10, showSizeChanger: true}}
                 onRow={(record) => {
                     return {

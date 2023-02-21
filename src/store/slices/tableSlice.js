@@ -25,51 +25,45 @@ const tableSlice = createSlice({
         },
         changeVisibility(state, action) {
             return Object.assign({}, state, {
-                columns: Object.keys(() => {
-                    return new Map(state.columns.forEach((item) => {
-                            if (action.payload.key === item.key) {
-                                item.visible = action.payload.visible
-                            } else {
-                                console.log('Bad')
-                            }
-
-                        })
-                    )
+                columns: state.columns.map((item) => {
+                    if (action.payload.key === item.key) {
+                        item.visible = action.payload.visible
+                        console.log('Good')
+                    } else {
+                        console.log('Bad')
+                    }
                 })
             })
         },
         changeRowData(state, action) {
-            // return Object.assign({}, state, {
-            //     data: Object.assign({}, state.data, {
-            //         columns: Object.keys(() => {
-            //             return new Map(state.data.columns.forEach((item) => {
-            //                     if (typeof item[action.payload.inputValue.oldValue] !== "undefined") {
-            //                         item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
-            //                         delete item[action.payload.inputValue.oldValue]
-            //                     } else {
-            //                         console.log('Bad')
-            //                     }
-            //
-            //                 })
-            //             )
-            //         })
-            //     })
-            // })
+            return Object.assign({}, state, {
+                data: Object.assign({}, state.data, {
+                    columns: state.data.columns.map((item) => {
+                        let newValue = action.payload.inputValue.newValue
+                        let oldValue = action.payload.inputValue.oldValue
+                        if ((oldValue in item) && (newValue !== oldValue)) {
+                            let entryValue = item[oldValue]
+                            let newObj = Object.assign({},  item)
+                            newObj[newValue] = entryValue
+                            delete newObj[oldValue]
+                            return newObj
+                        } else {
+                            return item
+                        }
+                    })
+                })
+            })
         },
         changeColumnsData(state, action) {
-            // return Object.assign({}, state, {
-            //     columns: Object.keys(() => {
-            //         return new Map(state.columns.map((item) => {
-            //                 if (typeof item[action.payload.inputValue.oldValue] !== "undefined") {
-            //                     item[action.payload.inputValue.newValue] = action.payload.inputValue.oldValue
-            //                     delete item[action.payload.inputValue.oldValue]
-            //                 } else {
-            //                     console.log('Bad')
-            //                 }
-            //             })
-            //         )
-            //     })
-            // })
+            return Object.assign({}, state, {
+                columns: state.columns.map((item) => {
+                    if ((item.dataIndex === action.payload.inputValue.oldValue) && !(action.payload.inputValue.newValue === action.payload.inputValue.oldValue)) {
+                        return Object.assign({item}, {dataIndex: action.payload.inputValue.newValue, key: action.payload.inputValue.newValue })
+                    } else {
+                        return item
+                    }
+                })
+            })
         },
     }
 })
