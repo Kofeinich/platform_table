@@ -27,10 +27,11 @@ const tableSlice = createSlice({
             return Object.assign({}, state, {
                 columns: state.columns.map((item) => {
                     if (action.payload.key === item.key) {
-                        item.visible = action.payload.visible
-                        console.log('Good')
+                        let newObj = Object.assign({},  item)
+                        newObj.visible = action.payload.visible
+                        return newObj
                     } else {
-                        console.log('Bad')
+                        return item
                     }
                 })
             })
@@ -58,7 +59,10 @@ const tableSlice = createSlice({
             return Object.assign({}, state, {
                 columns: state.columns.map((item) => {
                     if ((item.dataIndex === action.payload.inputValue.oldValue) && !(action.payload.inputValue.newValue === action.payload.inputValue.oldValue)) {
-                        return Object.assign({item}, {dataIndex: action.payload.inputValue.newValue, key: action.payload.inputValue.newValue })
+                        let newObj = Object.assign({},  item)
+                        newObj.dataIndex = action.payload.inputValue.newValue
+                        newObj.key = action.payload.inputValue.newValue
+                        return newObj
                     } else {
                         return item
                     }

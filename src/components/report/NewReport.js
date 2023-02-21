@@ -15,8 +15,7 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [activeRecord, setActiveRecord] = useState(null);
     const columnConfig= useSelector((state) => state.table.columns);
-// .filter(item => item.visible === true )
-    const sortedColumnConfig = columnConfig
+    const sortedColumnConfig = columnConfig.filter(item => item.visible === true)
     const dispatchData= useDispatch()
 
     useEffect(() => {
@@ -30,11 +29,11 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
     const rowConfig = useSelector((state) => state.table.data.columns)
     const additionalData = useSelector((state) => ({name: state.table.data.name, code: state.table.data.code}))
 
-    console.log(rowConfig)
-
     const closeModal = () => {
         setIsModalVisible(false)
     }
+
+    console.log(sortedColumnConfig)
 
     return (
         <section className={styles.table}>
@@ -43,7 +42,7 @@ export const NewReport = ({reportConfigJSON, reportData}) => {
                     <h4>{additionalData.name}</h4>
                     <h5>{additionalData.code}</h5>
                 </div>
-                <ReportFilter columns={columnConfig} />
+                <ReportFilter columns={sortedColumnConfig} />
             </header>
             <Table
                 dataSource={rowConfig}

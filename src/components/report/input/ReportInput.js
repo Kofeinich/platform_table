@@ -22,18 +22,14 @@ export const ReportInput = ({initialValue}) => {
     }
 
     const d = () => {
-        if (cancelUpdate.current) {
-            cancelUpdate.current = false
-            dispatchColumnValue(changeColumnsData({inputValue}))
-            dispatchRowValue(changeRowData({inputValue}))
-        }
+        dispatchColumnValue(changeColumnsData({inputValue}))
+        dispatchRowValue(changeRowData({inputValue}))
     }
 
 
     return <input
         className={styles.input}
         onChange={(event) => {
-            cancelUpdate.current = true
             handleInput(event)
             d()
         }}

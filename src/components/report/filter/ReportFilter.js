@@ -9,6 +9,8 @@ export const ReportFilter = () => {
 
     const columns= useSelector((state) => state.table.columns);
 
+    console.log(columns)
+
     const dispatchStatus = useDispatch()
 
     const filterMenu = (
